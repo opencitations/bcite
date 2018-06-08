@@ -1,0 +1,27 @@
+$def with (results, content)
+	$if results:
+		<section class="col-md-12 results-page">
+			<section class="saveExport"><input type="button" value="done?" class="save"></section>
+			<section id="disclaimer">
+				<h3>HOW TO</h3>
+				<span class="close">&times;</span>
+				<p>If the matched citation is correct, but there are typos in the bibliographic reference, use <i class="far fa-edit"></i> to edit the reference, and click <i class="fas fa-check"></i> to confirm </p>
+				<p>If the matched citation is wrong, use <i class="far fa-times"></i> to delete the citation, correct manually the reference, and click <i class="fas fa-check"></i> to confirm</p>
+				<p>A correct match, and a correct bibliographic reference do not require any intervention.</p>
+			</section>
+			<table id="results-table">
+				<tbody>
+					$for x in results:
+						<tr class="col-md-12">
+							<td class="col-md-5">$x['submitted']</td>
+							<td class="col-md-5">
+								<p name="customRef" class="customRef" id=$x['id']>$x['match']</p>
+								<button type="button" name="modify" class="modify"><i class="far fa-edit"></i></button>
+								<button type="button" name="reject" class="reject"><i class="fas fa-times"></i></button>
+								<button type="button" name="accept" class="accept"><i class="fas fa-check"></i></button>
+							</td>
+						</tr>
+				</tbody>
+				
+			</table>	
+		</section>

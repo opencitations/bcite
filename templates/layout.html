@@ -1,0 +1,33 @@
+$def with (content)
+
+<html>
+	<head>
+	    <title>BCite - Bibliographic Reference Correction Service</title>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	    <link rel="icon" href="./static/favicon.ico" />	    
+	    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	    
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+		<link href="static/css/tableexport.css" rel="stylesheet">
+		<script type="text/javascript" src="./static/js/main.js"></script>
+		<script type="text/javascript" src="./static/js/xlsx.core.min.js"></script>
+		<script type="text/javascript" src="./static/js/Blob.min.js"></script>
+		<script type="text/javascript" src="./static/js/FileSaver.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/5.0.0/js/tableexport.js"></script>
+		<script type="text/javascript" src="./static/js/mark.min.js"></script>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+	</head>
+	<body class="container-fluid">	
+		<section class="background">
+			<header class="row">
+				<h1 class="col-md-12"><a href="./" id="title">BCite</a> <span>bibliographic reference correction service</span></h1>
+			</header>
+		</section>
+		<section class="col-md-12 main_content row">
+				$:content
+		</section>
+	</body>
+</html>

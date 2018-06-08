@@ -1,0 +1,80 @@
+/* general */
+body { font-family: 'Karla'; color: #696969; }
+
+.background {
+	height: 100%;
+	margin-left: -15px;
+	position: fixed;
+	background-image: url("../img/bck.jpg");
+   	background-size: 100% 100%; 
+   	background-repeat: no-repeat;
+   	overflow-y: hidden; 
+   	background-position: fixed;}
+.no-bck { background-image: none !important; color: #696969; }
+
+header {margin-bottom: 2em; z-index: 1000;}
+header h1 {margin-top: 0px !important; padding-top: 0.5em;}
+header h1 a {padding: 1em 0.5em 2em 0.5em; background-color: #A67A00; color: white; 
+	-webkit-transition-duration: 0.4s; transition-duration: 0.4s; vertical-align: top;}
+header h1 a:hover {background-color: #696969; color: white ; text-decoration: none;}
+header h1 span {color: white; display: inline-block; width: 40%; font-size: 2.5rem;}
+
+/* buttons and tooltips */
+button, input[type='button'] { 
+	color: #696969;
+	background: transparent; 
+	border: 2px solid #696969 !important;
+	border-radius: 4px;
+	padding: 0.4em;
+	text-align: center;
+	margin: 4px 2px;
+	-webkit-transition-duration: 0.4s !important; /* Safari */
+	transition-duration: 0.4s !important;
+	cursor: pointer;
+	}
+
+input[type='button'] {font-weight: 700;}
+button:hover, input[type='button']:hover { background-color: #696969;  color: white; }
+.tip {color: #696969;}
+.tip:hover {color: #D3D3D3;}
+
+
+
+
+/* form */
+form[name='main'] {padding-left: 2em; overflow: auto !important; position: relative; margin-top: 10rem;}
+table tbody tr th {vertical-align: top; padding: 0.5em; width: 35%;  font-style: normal !important;}
+table tbody tr td {width: 100%; padding:0.6em !important;}
+input[type='text'] {border: none; border-bottom: solid 1px rgb(192,192,192); width:80%;}
+input[type='text']:focus {outline: none !important; border-bottom: solid 1px #A67A00; -webkit-transition-duration: 0.4s; transition-duration: 0.4s;}
+textarea { border: none; border-bottom: solid 1px rgb(192,192,192);  overflow: hidden; padding: 0; outline: none; }
+
+/* results */
+#disclaimer {padding: 2em; background-color: #A67A00; color: white; width: 100%;  opacity: 0.5; filter: alpha(opacity=50);}
+#disclaimer:hover {opacity: 1.0; filter: alpha(opacity=100); -webkit-transition-duration: 0.4s; transition-duration: 0.4s;}
+.close { margin-left: 15px; color: white; font-weight: bold; float: right; font-size: 22px; line-height: 20px; cursor: pointer; transition: 0.3s; }
+.close:hover {color: #696969; }
+
+.results-page {background-color: white;}
+#results-table tbody tr td {vertical-align: top;}
+#results-table tbody tr td:nth-child(1) {color: black; }
+p[contenteditable="false"] { border-bottom: solid 1px rgb(192,192,192);}
+p[contenteditable="true"] { color: #D3D3D3; cursor: pointer; border-bottom: solid 1px rgb(192,192,192);}
+p[contenteditable="true"]:focus {outline: none !important; border-bottom: solid 1px #A67A00; -webkit-transition-duration: 0.4s; transition-duration: 0.4s;}
+
+/*.save {position: absolute; right: 0; background-color: #A67A00;}
+*/
+@media only screen and (max-width: 1150px) {
+	.background { background-image: none;}
+	form[name='main'], .results-page {margin-top: 14rem;}
+    /*body { color: white; background: url(../img/bck.jpg) no-repeat center center fixed; 
+		  -webkit-background-size: cover;
+		  -moz-background-size: cover;
+		  -o-background-size: cover;
+		  background-size: cover;}
+	.no-bck { background-image: none !important; color: #696969; }*/
+    input[type='text'] {color: #696969; border-radius: 3px;}
+    /*button {background: transparent; color: white; border-color: white;}
+	button:hover {color: #696969; background-color: white; }*/
+
+}
