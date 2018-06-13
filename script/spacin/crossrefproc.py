@@ -219,6 +219,7 @@ class CrossrefProcessor(FormatProcessor):
             if cur_res is None and entry is not None:
                 if do_process_entry:
                     cur_res = self.process_entry(entry)
+
                 if cur_res is None:
                     if self.get_bib_entry_doi and extracted_doi is not None:
                         extracted_doi_used = True

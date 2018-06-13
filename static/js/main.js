@@ -57,7 +57,7 @@ jQuery(document).ready(function () {
 
   // buttons behaviour
   $('.accept').hide();
-  $('.customRef').attr('data-update','false'); // default behaviour
+  $('.customRef').attr('data-update','true'); // default behaviour
 
   $('.close').click(function() {
     $('#disclaimer').toggle( "blind" );
@@ -73,7 +73,7 @@ jQuery(document).ready(function () {
       var area = $(this).prevAll('p:first');
       area.empty();
       area.focus();
-      area.attr('data-update','true'); // if reject change the value
+      area.attr('data-update','false'); // if reject change the value
       $(this).next('button.accept:first').show();
 
       $("button.accept").click(function() {
@@ -119,7 +119,7 @@ jQuery(document).ready(function () {
     $( ".customRef" ).each(function() {
       console.log( timestamp+'/'+$(this).attr('data-update')+'/'+citing+'/'+$(this).attr('id')+'/'+encodeURIComponent($(this).text()) );
       var request = new XMLHttpRequest();
-      request.open('GET', 'http://localhost:8000/store/'+timestamp+'/'+$(this).attr('data-update')+'/'+citing+'/'+$(this).attr('id')+'/'+encodeURIComponent($(this).text()), true);
+      request.open('GET', 'http://localhost:8000/api/store/'+timestamp+'/'+$(this).attr('data-update')+'/'+citing+'/'+$(this).attr('id')+'/'+encodeURIComponent($(this).text()), true);
       request.send();
     });
   });

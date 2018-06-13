@@ -1,4 +1,4 @@
-#url /api/v1
+#url /api
 #type api
 #base http://localhost:8000
 #title REST API for BCite
@@ -6,12 +6,12 @@
 #version Version 1.0.0
 #contacts [silvio.peroni@unibo.it](mailto:silvio.peroni@unibo.it)
 #license This document is licensed with a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/legalcode), while the REST API itself has been created using [RAMOSE](https://github.com/opencitations/ramose), the *Restful API Manager Over SPARQL Endpoints* created by [Silvio Peroni](https://orcid.org/0000-0003-0530-4305), which is licensed with an [ISC license](https://opensource.org/licenses/ISC).
-#endpoint http://localhost:9999
-#addon bciteapi
+#endpoint http://localhost:9999/blazegraph/sparql
+#addon script/api/bciteapi
 
 #url /citing/{timestamp}/{json}
 #type operation
-#timestamp str([0-9]+)
+#timestamp str([0-9]+\.[0-9]+)
 #json str(.+)
 #preprocess create_br(timestamp, json)
 #method get
@@ -34,7 +34,7 @@ LIMIT 1
 
 #url /reference/{timestamp}/{citing}/{style}/{reference}
 #type operation
-#timestamp str([0-9]+)
+#timestamp str([0-9]+\.[0-9]+)
 #citing str(br/[0-9]+)
 #style str([A-z]+)
 #reference str(.+)
@@ -55,7 +55,7 @@ PREFIX frbr: <http://purl.org/vocab/frbr/core#>
 SELECT ?id ?reference
 WHERE {
     BIND (<[[reference]]> AS ?br) .
-    <[[citing]]> frbr:part [
+    <http://localhost:8000/corpus/[[citing]]> frbr:part [
         c4o:hasContent ?reference ;
         biro:references ?br
     ]
@@ -65,8 +65,8 @@ LIMIT 1
 
 #url /store/{timestamp}/{accept}/{citing}/{cited}/{reference}
 #type operation
-#timestamp str([0-9]+)
-#accept str((true|false))
+#timestamp str([0-9]+\.[0-9]+)
+#accept str(.+)
 #citing str(br/[0-9]+)
 #cited str(br/[0-9]+)
 #reference str(.+)
@@ -75,7 +75,7 @@ LIMIT 1
 #description This operation returns the number of new entities added in the OpenCitations Corpus local instance. Note that the `fix_reference` function used for storing correctly the OC bibliographic resource of the cited entity will substitute the "timestamp" part with the "yyyy-mm-ddThh:mm:ss" string of the creation date.
 #call /store/1234567/false/br/1/br/10/Peroni%2C%20S.%2C%20Shotton%2C%20D.%20(2012).%20FaBiO%20and%20CiTO%3A%20ontologies%20for%20describing%20bibliographic%20resources%20and%20citations.%20In%20Journal%20of%20Web%20Semantics%3A%20Science%2C%20Services%20and%20Agents%20on%20the%20World%20Wide%20Web%2C%2017%20(December%202012)%3A%2033-43.%20Amsterdam%2C%20The%20Netherlands%3A%20Elsevier.%20DOI%3A%2010.1016%2Fj.websem.2012.08.001
 #output_json []
-#field_type str(oci) str(citing) str(cited) datetime(creation) duration(timespan)
+#field_type int(n)
 #sparql PREFIX prov: <https://www.w3.org/ns/prov#>
 SELECT (count(?en) as ?n) {
     ?en ^prov:specializationOf/prov:generatedAtTime "[[timestamp]]"

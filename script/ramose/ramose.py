@@ -377,7 +377,7 @@ The operations that this API implements are:
                     self.website = item["base"]
                     self.tp = "%s?query=" % item["endpoint"]
                     if "addon" in item:
-                        addon_abspath = abspath(dirname(conf_file) + sep + item["addon"])
+                        addon_abspath = abspath(dirname(abspath(conf_file)) + sep + item["addon"])
                         path.append(dirname(addon_abspath))
                         self.addon = import_module(basename(addon_abspath))
                 else:

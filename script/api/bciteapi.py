@@ -59,7 +59,7 @@ def create_resources(json=None):
 def gen_prov_and_store_data(cp, rf, timestamp):
     prov = ProvSet(cp.graph_set(), base_iri, context_path, default_dir, full_info_dir, rf,
                    dir_split_number, items_per_file, "")
-    prov.generate_provenance(int(timestamp))
+    prov.generate_provenance(int(float(timestamp)))
 
     # Store all the data
     res_storer = Storer(cp.graph_set(),
@@ -124,6 +124,7 @@ def create_br(timestamp, json):
 
 
 def call_crossref(timestamp, citing, style, reference):
+    lower_style = style.lower()
     citing_url = base_iri + citing
 
     r_text = unquote(reference)
@@ -152,9 +153,9 @@ def call_crossref(timestamp, citing, style, reference):
     if doi is not None:
         doi_str = str(doi)
 
-        if style == "chicago":
+        if lower_style == "chicago":
             style_str = "chicago-author-date"
-        elif style == "mla":
+        elif lower_style == "mla":
             style_str = "modern-language-association"
         else:
             style_str = "apa"

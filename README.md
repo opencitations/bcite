@@ -11,8 +11,8 @@ The tool includes a web interface for data entry and cleaning, a triplestore [Bl
 ## Usage
 
 * Clone or download the git repo.
-* `python3 bin/app.py 8000` The BCite App runs at [http://localhost:8000](http://localhost:8000). 
-* `java -server -Xmx4g -jar blazegraph.jar` The triplestore runs at port 9999. 
+* `python3 -m script.web.app 8000` The BCite App runs at [http://localhost:8000](http://localhost:8000).
+* `java -server -Xmx1g -jar blazegraph.jar` The triplestore runs at port 9999.
 
 ## Evaluation
 To evaluate the precision of the tool, and the number of open citations created, the following data is used: [https://doi.org/10.6084/m9.figshare.6462443](https://doi.org/10.6084/m9.figshare.6462443). Results are outlined in the csv file.

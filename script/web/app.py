@@ -1,18 +1,35 @@
 import web , re , requests , string , urllib , time , datetime
 import urllib.parse
 from web import form
-from script.ramose import APIManager
+from script.ramose.ramose import APIManager
 
 web.config.debug = False
 
 # routing
 urls = (
 	'/','index',
-    '/results', 'results'
+    '/results', 'results',
+    "(/api/.+)", "Api",
 )
 
 # templates
 render = web.template.render('templates/', base="layout", globals={'re':re})
+
+coci_api_manager = APIManager(["v1.hf"])
+
+class Api:
+    def GET(self, call):
+        status_code, res = coci_api_manager.exec_op(call)
+        if status_code == 200:
+            web.header('Access-Control-Allow-Origin', '*')
+            web.header('Access-Control-Allow-Credentials', 'true')
+            web.header('Content-Type', "application/json")
+            return res
+        else:
+            with StringIO(res) as f:
+                mes = json.dumps(next(csv.DictReader(f)), ensure_ascii=False)
+                raise web.HTTPError(
+                    str(status_code), {"Content-Type": "application/json"}, mes)
 
 class DinamycForm(form.Form):
     """dynamic form"""
@@ -81,12 +98,12 @@ class index:
             
             ##################### first call to BCite API: send metadata about the citing entity and get back an ID
             # /citing/{timestamp}/{json}
-            # request = requests.get('http://localhost:8000/citing/'+str(ts)+'/'+urllib.parse.quote(citingEntity)) 
-            # response = request.json()
-            # idCitingRef = response[0]['id']
-            # raise web.seeother('/results?idRef='+idCitingRef+'&references='+urllib.parse.quote((web.input().references))+'&style='+web.input().style+'&time='+str(ts))
+            request = requests.get('http://localhost:8000/api/citing/'+str(ts)+'/'+urllib.parse.quote(citingEntity))
+            response = request.json()
+            idCitingRef = response[0]['id']
+            raise web.seeother('/results?idRef='+idCitingRef+'&references='+urllib.parse.quote((web.input().references))+'&style='+web.input().style+'&time='+str(ts))
             ##################### remove the following line
-            raise web.seeother('/results?references='+urllib.parse.quote((web.input().references))+'&style='+web.input().style+'&time='+str(ts))
+            # raise web.seeother('/results?references='+urllib.parse.quote((web.input().references))+'&style='+web.input().style+'&time='+str(ts))
 
 class results:
     def GET(self):
@@ -98,21 +115,21 @@ class results:
         for referenceText in splitReferencesText:
             ##################### second call to the API: send references and get back the matched references
             # /reference/{timestamp}/{citing}/{style}/{reference}
-            # request = requests.get('http://localhost:8000/reference/'+str(ts)+'/'+web.input().idRef+'/'+web.input().style+'/'+urllib.parse.quote(referenceText) ) 
-            # response = request.json()
-            # referenceMatch = {}
-            # referenceMatch['submitted'] = referenceText
-            # referenceMatch['match'] = request[0]['reference']
-            # referenceMatch['id'] = request[0]['id']
-            # results.append(referenceMatch)
-            ##################### remove the following lines
-            encodedReference = '+'.join(word for word in re.compile('\w+').findall(referenceText))
-            request = requests.get('http://api.crossref.org/works?query='+encodedReference+'?sample=1&select=DOI,title')
+            request = requests.get('http://localhost:8000/api/reference/'+str(ts)+'/'+web.input().idRef+'/'+web.input().style+'/'+urllib.parse.quote(referenceText) )
+            response = request.json()
             referenceMatch = {}
             referenceMatch['submitted'] = referenceText
-            referenceMatch['match'] = request.text 
-            referenceMatch['id'] = '123'
+            referenceMatch['match'] = request[0]['reference']
+            referenceMatch['id'] = request[0]['id']
             results.append(referenceMatch)
+            ##################### remove the following lines
+            # encodedReference = '+'.join(word for word in re.compile('\w+').findall(referenceText))
+            # request = requests.get('http://api.crossref.org/works?query='+encodedReference+'?sample=1&select=DOI,title')
+            # referenceMatch = {}
+            # referenceMatch['submitted'] = referenceText
+            # referenceMatch['match'] = request.text
+            # referenceMatch['id'] = '123'
+            # results.append(referenceMatch)
         #sortedResults = sorted(results.items(), key=lambda x: x[0])
         print(results)
         return render.results(results=results, content='Placeholder for the citing entity')

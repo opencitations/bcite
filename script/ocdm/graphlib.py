@@ -148,18 +148,21 @@ class GraphEntity(object):
         return self._create_literal(GraphEntity.has_subtitle, string)
 
     def create_pub_date(self, date_list):
-        l_date_list = len(date_list)
-        if l_date_list != 0:
-            if l_date_list == 3 and (date_list[1] != 1 or date_list[2] != 1):
-                cur_type = XSD.date
-                string = datetime(date_list[0], date_list[1], date_list[2], 0, 0).strftime('%Y-%m-%d')
-            elif l_date_list == 2:
-                cur_type = XSD.gYearMonth
-                string = datetime(date_list[0], date_list[1], 1, 0, 0).strftime('%Y-%m')
-            else:
-                cur_type = XSD.gYear
-                string = datetime(date_list[0], 1, 1, 0, 0).strftime('%Y')
-            return self._create_literal(GraphEntity.has_publication_date, string, cur_type, False)
+        if date_list is not None:
+            l_date_list = len(date_list)
+            if l_date_list != 0 and date_list[0] is not None:
+                if l_date_list == 3 and \
+                        ((date_list[1] is not None and date_list[1] != 1) or
+                         (date_list[2] is not None and date_list[2] != 1)):
+                    cur_type = XSD.date
+                    string = datetime(date_list[0], date_list[1], date_list[2], 0, 0).strftime('%Y-%m-%d')
+                elif l_date_list == 2 and date_list[1] is not None:
+                    cur_type = XSD.gYearMonth
+                    string = datetime(date_list[0], date_list[1], 1, 0, 0).strftime('%Y-%m')
+                else:
+                    cur_type = XSD.gYear
+                    string = datetime(date_list[0], 1, 1, 0, 0).strftime('%Y')
+                return self._create_literal(GraphEntity.has_publication_date, string, cur_type, False)
 
     def create_starting_page(self, string):
         if re.search("[-–]+", string) is None:
