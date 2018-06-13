@@ -751,7 +751,6 @@ The operations that this API implements are:
 
         url_parsed = urlsplit(op_complete_url)
         op_url = url_parsed.path
-
         op = self.best_match(op_url)
         if op is not None:
             i = self.conf[op]

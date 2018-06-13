@@ -1,7 +1,8 @@
-import web , re , requests , string , urllib , time , datetime
+import web , re , requests , string , urllib , time , datetime, json, csv
 import urllib.parse
 from web import form
 from script.ramose.ramose import APIManager
+from io import StringIO
 
 web.config.debug = False
 
@@ -95,11 +96,11 @@ class index:
             citingEntity['year'] = data.year
             citingEntity['publisher'] = data.publisher
             citingEntity['doi'] = data.DOI
-            
+            citingEntityEncoded = json.dumps(citingEntity)
             ##################### first call to BCite API: send metadata about the citing entity and get back an ID
             # /citing/{timestamp}/{json}
-            request = requests.get('http://localhost:8000/api/citing/'+str(ts)+'/'+urllib.parse.quote(citingEntity))
-            response = request.json()
+            request = requests.get('http://localhost:8000/api/citing/'+str(ts)+'/'+urllib.parse.quote(str(citingEntityEncoded)))
+            response = json.loads(request.text)
             idCitingRef = response[0]['id']
             raise web.seeother('/results?idRef='+idCitingRef+'&references='+urllib.parse.quote((web.input().references))+'&style='+web.input().style+'&time='+str(ts))
             ##################### remove the following line
@@ -109,18 +110,18 @@ class results:
     def GET(self):
         s = str(web.ctx.query)
         referencesDecoded = urllib.parse.unquote(web.input().references)
-        timeStamp = s.split("time=",1)[1]
+        timeStamp = s.split("time=", 1)[1]
         splitReferencesText = [x for x in referencesDecoded.split('\n') if x != '\r'] # extract references from 'references' 
         results = []        
         for referenceText in splitReferencesText:
             ##################### second call to the API: send references and get back the matched references
             # /reference/{timestamp}/{citing}/{style}/{reference}
-            request = requests.get('http://localhost:8000/api/reference/'+str(ts)+'/'+web.input().idRef+'/'+web.input().style+'/'+urllib.parse.quote(referenceText) )
+            request = requests.get('http://localhost:8000/api/reference/'+str(web.input().time)+'/'+web.input().idRef+'/'+web.input().style+'/'+urllib.parse.quote(referenceText) )
             response = request.json()
             referenceMatch = {}
             referenceMatch['submitted'] = referenceText
-            referenceMatch['match'] = request[0]['reference']
-            referenceMatch['id'] = request[0]['id']
+            referenceMatch['match'] = response[0]['reference']
+            referenceMatch['id'] = response[0]['id']
             results.append(referenceMatch)
             ##################### remove the following lines
             # encodedReference = '+'.join(word for word in re.compile('\w+').findall(referenceText))
