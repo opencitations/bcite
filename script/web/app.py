@@ -117,6 +117,7 @@ class results:
             ##################### second call to the API: send references and get back the matched references
             # /reference/{timestamp}/{citing}/{style}/{reference}
             request = requests.get('http://localhost:8000/api/reference/'+str(web.input().time)+'/'+web.input().idRef+'/'+web.input().style+'/'+urllib.parse.quote(referenceText) )
+            request.encoding = "UTF-8"
             response = request.json()
             referenceMatch = {}
             referenceMatch['submitted'] = referenceText
@@ -132,7 +133,7 @@ class results:
             # referenceMatch['id'] = '123'
             # results.append(referenceMatch)
         #sortedResults = sorted(results.items(), key=lambda x: x[0])
-        print(results)
+        #print(results)
         return render.results(results=results, content='Placeholder for the citing entity')
 
 if __name__ == "__main__":
