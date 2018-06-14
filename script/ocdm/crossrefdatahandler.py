@@ -200,7 +200,7 @@ class CrossrefDataHandler(object):
             # If the resource does not exist already, create a new one
             if retrieved_agent is None:
                 cur_agent = self.g_set.add_ra(self.name, self.id, source)
-                if cur_orcid_record is not None:
+                if cur_orcid_record is not None and self.of is not None:
                     cur_agent_orcid = \
                         self.g_set.add_id(self.of.name, self.of.id, self.of.get_last_query())
                     cur_agent_orcid.create_orcid(cur_orcid_record["orcid"])
