@@ -5,8 +5,17 @@ The tool includes a web interface for data entry and cleaning, a triplestore [Bl
 
 ## Requirements
 
-* [python3](https://www.python.org/download/releases/3.0/?)
-* [webpy](http://webpy.org/)
+* python3
+* webpy
+* rdflib
+* requests
+* argparse
+* dateutil
+* markdown
+* codecs
+* unicodedata
+* nltk.metrics
+* netifaces
 
 ## Usage
 

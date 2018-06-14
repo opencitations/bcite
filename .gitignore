@@ -2,3 +2,4 @@ triplestore/occ.jnl
 triplestore/rules.log
 corpus/*/
 __pycache__
+orcid_conf.json
