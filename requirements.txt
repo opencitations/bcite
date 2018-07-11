@@ -1,0 +1,10 @@
+web.py==0.40.dev0
+rdflib
+requests
+argparse
+dateutils
+markdown
+nltk
+netifaces
+SPARQLWrapper
+
