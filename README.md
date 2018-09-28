@@ -6,13 +6,23 @@ The tool includes a web interface for data entry and cleaning, a triplestore [Bl
 ## Requirements
 
 * git
-* python3 with pip
+* python3 with pip (<=3.6 suggested)
 * java
 
 ## Installation
 
-1. Clone or download the git repo.
-2. `pip install -r requirements.txt`
+Clone or download the git repo.
+
+```
+cd bcite
+virtualenv --python=python3.6 .
+source bin/activate
+pip3 install -r requirements.txt
+cd triplestore/sh  
+./run-local.sh
+cd ../..
+python3 -m script.web.app 8000
+```
 
 ## Usage
 
