@@ -31,7 +31,8 @@ from datetime import datetime
 from rdflib.namespace import RDF
 
 
-cited_doi_query = """SELECT ?cited ?doi WHERE {
+cited_doi_query = """
+SELECT ?cited ?doi WHERE {
     ?citing <%s> ?cited .
     OPTIONAL {
         ?cited <%s> [
@@ -84,9 +85,7 @@ def gen_prov_and_store_data(cp, rf, timestamp):
 
 def create_br(timestamp, json):
     rf, of, cp, cdh = create_resources()
-
     d = loads(unquote(json))
-
     res = None
 
     if "doi" in d:

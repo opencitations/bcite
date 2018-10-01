@@ -35,9 +35,9 @@ button, input[type='button'] {
 
 input[type='button'] {font-weight: 700;}
 button:hover, input[type='button']:hover { background-color: #696969;  color: white; }
-.tip {color: #696969;}
+.tip {color: #696969; padding-left: 0.5em;}
 .tip:hover {color: #D3D3D3;}
-
+td em {display: block; padding-top: 0.2em;}
 
 
 
@@ -47,7 +47,7 @@ table tbody tr th {vertical-align: top; padding: 0.5em; width: 35%;  font-style:
 table tbody tr td {width: 100%; padding:0.6em !important;}
 input[type='text'] {border: none; border-bottom: solid 1px rgb(192,192,192); width:80%;}
 input[type='text']:focus {outline: none !important; border-bottom: solid 1px #A67A00; -webkit-transition-duration: 0.4s; transition-duration: 0.4s;}
-textarea { border: none; border-bottom: solid 1px rgb(192,192,192);  overflow: hidden; padding: 0; outline: none; }
+textarea { border: none; border-bottom: solid 1px rgb(192,192,192);  overflow: hidden; padding: 0; outline: none; width: 80%; height: 20px;}
 
 /* results */
 #disclaimer {padding: 2em; background-color: #A67A00; color: white; width: 100%;  opacity: 0.5; filter: alpha(opacity=50);}

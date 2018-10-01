@@ -1,10 +1,7 @@
-$def with (authorForm, form, results)
+$def with (form, results)
 	<section id="leftHalf" class="col-md-6"></section>
 	<form name="main" method="post" class="col-md-6 float-right"> 
 		<h2>Citing article</h2>
-		$if not authorForm.valid: <p class="error">Try again:</p>
-		$:authorForm.render()
-
 		$if not form.valid: <p class="error">Try again:</p>
 		$:form.render()  
 	</form>
