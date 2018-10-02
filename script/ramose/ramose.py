@@ -187,35 +187,35 @@ The operations that this API implements are:
             * {
                 font-family: Verdana, Geneva, sans-serif;
             }
-            
+
             body {
-                margin: 3%; 
+                margin: 3%;
                 line-height: 1.5em;
             }
-            
+
             #operations > div {
                 border: 1px solid black;
                 border-radius: 15px;
                 margin-top: 20px;
                 margin-left: 1%;
             }
-            
+
             #operations > div > * {
                 padding-left: 2%;
             }
-            
+
             #operations > div ul, #operations > div ol {
                 padding-left: 4%;
             }
-            
+
             .params {
                 margin-bottom: 0;
             }
-            
+
             .params + ul {
                 margin-top: 0;
             }
-            
+
             #operations h3 {
                 background-color: #246375;
                 color: #d8edf3;
@@ -224,7 +224,7 @@ The operations that this API implements are:
                 border-radius: 14px 14px 0 0;
                 padding: 10px;
             }
-            
+
             pre {
                 background-color: #d8edf3;
                 padding: 10px;
@@ -236,7 +236,7 @@ The operations that this API implements are:
                 font-size: 80%;
                 line-height: 1.2em;
             }
-            
+
             p.ex {
                 color: #246375;
                 background-color: #d8edf3;
@@ -246,30 +246,30 @@ The operations that this API implements are:
                 border-top: 1px solid #246375;
                 border-bottom: 1px solid #246375;
             }
-            
+
             header > h2:first-of-type {
                 margin-bottom: 5px;
             }
-            
+
             header > ol:first-of-type {
                 margin-top: 0;
             }
-            
+
             :not(pre) > code {
                 background-color: #ffe6f2;
                 border: 1px solid #ff99cc;
                 padding: 0 2px 0 2px;
                 border-radius: 3px;
             }
-            
+
             *:not(div) > p {
                 margin-left: 1.2%;
             }
-            
+
             h1, h2, h3, h4, h5, h6 {
                 font-weight: normal;
             }
-            
+
             h2 ~ h2, section > h2 {
                 border-top: 1px solid #246375;
                 border-left: 1px solid #246375;
@@ -279,7 +279,7 @@ The operations that this API implements are:
                 color: #246375;
                 margin-top: 40px;
             }
-            
+
             h2 a[href] {
                 background-color: #d8edf3;
                 color: #246375;
@@ -290,7 +290,7 @@ The operations that this API implements are:
                 position:relative;
                 top: -3px;
             }
-            
+
             h3 a[href] {
                 background-color: #d8edf3;
                 color: #246375;
@@ -303,12 +303,12 @@ The operations that this API implements are:
                 right: -11px;
                 border-radius: 0 14px 0 0;
             }
-            
+
             p {
                 overflow-wrap: break-word;
                 word-wrap: break-word;
             }
-            
+
             footer {
                 margin-top: 20px;
                 border-top: 1px solid lightgrey;
