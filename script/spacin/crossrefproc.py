@@ -352,5 +352,3 @@ class CrossrefProcessor(FormatProcessor):
     def message(self, mess, entity_type, entity, url="not provided"):
         return super(CrossrefProcessor, self).message(mess) + \
                "\n\t%s: %s\n\tURL: %s" % (entity_type, entity, url)
-
-

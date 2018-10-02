@@ -116,4 +116,3 @@ if __name__ == "__main__":
 
     of = ORCIDFinder(args.c)
     print(json.dumps(of.get_orcid_ids(args.doi, args.n), indent=4, ensure_ascii=False))
-

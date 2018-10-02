@@ -98,7 +98,7 @@ class ResourceFinder(object):
         query = """
             SELECT DISTINCT ?res WHERE {
                 <%s> <%s> ?res .
-                ?res <%s> <%s> 
+                ?res <%s> <%s>
             }""" % (citing_res, GraphEntity.contains_reference, GraphEntity.references, cited_res)
 
         return self.__query(query)
@@ -106,7 +106,7 @@ class ResourceFinder(object):
     def retrieve_reference_text(self, ref_res):
         query = """
             SELECT DISTINCT ?res WHERE {
-                <%s> <%s> ?res 
+                <%s> <%s> ?res
             }""" % (ref_res, GraphEntity.has_content)
 
         return self.__query(query)
@@ -129,7 +129,7 @@ class ResourceFinder(object):
         query = """
                 SELECT DISTINCT ?res WHERE {
                     BIND(iri("%s") as ?res) .
-                    ?res a <%s> 
+                    ?res a <%s>
                 }""" % (string, str(type))
 
         return self.__query(query)
@@ -297,4 +297,3 @@ class ResourceFinder(object):
         result = self.g.query(query)
         for res, in result:
             return res
-

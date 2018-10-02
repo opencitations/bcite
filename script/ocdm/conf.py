@@ -35,5 +35,3 @@ info_dir = base_dir + "id-counter/"
 context_file_path = base_dir + "context.json"
 default_dir = "_"
 full_info_dir = info_dir + default_dir + "/"
-
-
