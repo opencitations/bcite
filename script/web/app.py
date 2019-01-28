@@ -90,7 +90,7 @@ class results:
         s = str(web.ctx.query)
         referencesDecoded = urllib.parse.unquote(web.input().references)
         timeStamp = s.split("time=", 1)[1]
-        splitReferencesText = [x for x in referencesDecoded.split('\n') if x != '\r'] # extract references from 'references' 
+        splitReferencesText = [x for x in referencesDecoded.split('\n') if x != '\r' and x != '\n' and x != ''] # extract references from 'references' 
         splitReferences = [s.replace('\r', '') for s in splitReferencesText]
         results = []        
         for referenceText in splitReferences:
