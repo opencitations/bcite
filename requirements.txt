@@ -5,7 +5,7 @@ idna==2.7
 isodate==0.6.0
 Markdown==3.0.1
 netifaces==0.10.7
-nltk==3.3
+nltk==3.4.5
 pyparsing==2.2.1
 python-dateutil==2.7.3
 pytz==2018.5
