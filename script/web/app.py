@@ -79,9 +79,14 @@ class index:
             citingEntityEncoded = json.dumps(citingEntity)
             # /citing/{timestamp}/{json}
             request = requests.get('http://localhost:8000/api/citing/'+str(ts)+'/'+urllib.parse.quote( citingEntityEncoded ))
-            response = json.loads(request.text)
-            idCitingRef = response[0]['id']
-            raise web.seeother('/results?idRef='+idCitingRef+'&references='+urllib.parse.quote((web.input().references))+'&style='+web.input().style+'&time='+str(ts))
+            print("REQUEST:", 'http://localhost:8000/api/citing/'+str(ts)+'/'+urllib.parse.quote( citingEntityEncoded ))
+            if request.status_code == 200:
+                request.encoding = "utf-8"
+                response = request.text
+                idCitingRef = response[0]['id']
+                raise web.seeother('/results?idRef='+idCitingRef+'&references='+urllib.parse.quote((web.input().references))+'&style='+web.input().style+'&time='+str(ts))
+            else:
+                raise web.notfound()
         
         else:
             return render.index(f, results=None)
