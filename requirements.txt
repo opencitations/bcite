@@ -14,5 +14,5 @@ rdflib-jsonld==0.4.0
 requests==2.19.1
 six==1.11.0
 SPARQLWrapper==1.8.2
-urllib3==1.23
+urllib3==1.26.5
 web.py==0.40.dev0
